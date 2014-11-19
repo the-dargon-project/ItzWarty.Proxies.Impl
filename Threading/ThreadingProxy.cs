@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using ImpromptuInterface;
 
 namespace ItzWarty.Threading {
@@ -15,6 +16,18 @@ namespace ItzWarty.Threading {
 
       public ICountdownEvent CreateCountdownEvent(int initialCount) {
          return new CountdownEventProxy(initialCount);
+      }
+
+      public ICancellationTokenSource CreateCancellationTokenSource() {
+         return new CancellationTokenSource().ActLike<ICancellationTokenSource>();
+      }
+
+      public ICancellationTokenSource CreateCancellationTokenSource(int cancellationDelayMilliseconds) {
+         return new CancellationTokenSource(cancellationDelayMilliseconds).ActLike<ICancellationTokenSource>();
+      }
+
+      public ICancellationTokenSource CreateCancellationTokenSource(TimeSpan cancellationDelay) {
+         return new CancellationTokenSource(cancellationDelay).ActLike<ICancellationTokenSource>();
       }
    }
 }

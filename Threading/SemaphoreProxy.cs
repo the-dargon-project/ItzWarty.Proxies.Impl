@@ -25,12 +25,20 @@ namespace ItzWarty.Threading {
          obj.Wait();
       }
 
+      public bool Wait(int milliseconds) {
+         return obj.Wait(milliseconds);
+      }
+
       public bool Wait(TimeSpan timespan) {
          return obj.Wait(timespan);
       }
 
       public bool Wait(CancellationToken cancellationToken) {
          return !Util.IsThrown<OperationCanceledException>(() => obj.Wait(cancellationToken));
+      }
+
+      public bool Wait(int millseconds, CancellationToken cancellationToken) {
+         return obj.Wait(millseconds, cancellationToken);
       }
 
       public bool Wait(TimeSpan timespan, CancellationToken cancellationToken) {
