@@ -10,11 +10,11 @@ namespace ItzWarty.Threading {
       }
 
       public ISemaphore CreateSemaphore(int initialCount, int maximumCount) {
-         return new SemaphoreSlim(initialCount, maximumCount).ActLike<ISemaphore>();
+         return new SemaphoreProxy(initialCount, maximumCount);
       }
 
       public ICountdownEvent CreateCountdownEvent(int initialCount) {
-         return new CountdownEvent(initialCount).ActLike<ICountdownEvent>();
+         return new CountdownEventProxy(initialCount);
       }
    }
 }

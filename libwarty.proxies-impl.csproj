@@ -38,7 +38,7 @@
     </Reference>
     <Reference Include="libwarty, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>packages\libwarty.0.0.1\lib\portable-net45+netcore45+MonoAndroid1+MonoTouch1\libwarty.dll</HintPath>
+      <HintPath>packages\libwarty.0.0.3\lib\portable-net45+netcore45+MonoAndroid1+MonoTouch1\libwarty.dll</HintPath>
     </Reference>
     <Reference Include="libwarty.proxies-api, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -57,6 +57,8 @@
     <Compile Include="Processes\ParentProcessUtilities.cs" />
     <Compile Include="Processes\ProcessProxy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Threading\CountdownEventProxy.cs" />
+    <Compile Include="Threading\SemaphoreProxy.cs" />
     <Compile Include="Threading\ThreadingProxy.cs" />
   </ItemGroup>
   <ItemGroup>
