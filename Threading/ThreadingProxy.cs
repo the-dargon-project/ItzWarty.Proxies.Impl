@@ -4,6 +4,14 @@ using ImpromptuInterface;
 
 namespace ItzWarty.Threading {
    public class ThreadingProxy : IThreadingProxy {
+      public void Sleep(int durationMilliseconds) {
+         Thread.Sleep(durationMilliseconds);
+      }
+
+      public void Sleep(TimeSpan duration) {
+         Thread.Sleep(duration);
+      }
+
       public IThread CreateThread(ThreadEntryPoint entryPoint, ThreadCreationOptions options) {
          var thread = new Thread(() => entryPoint());
          thread.IsBackground = options.IsBackground;
