@@ -42,7 +42,7 @@
     </Reference>
     <Reference Include="libwarty.proxies-api, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>packages\libwarty.proxies-api.0.0.3\lib\net45\libwarty.proxies-api.dll</HintPath>
+      <HintPath>packages\libwarty.proxies-api.0.0.6\lib\net45\libwarty.proxies-api.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -54,6 +54,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IO\FileSystemProxy.cs" />
+    <Compile Include="IO\NetworkingProxy.cs" />
+    <Compile Include="Networking\ConnectedSocket.cs" />
+    <Compile Include="Networking\ListenerSocket.cs" />
+    <Compile Include="Networking\NetworkingProxy.cs" />
+    <Compile Include="Networking\TcpEndPoint.cs" />
     <Compile Include="Processes\ParentProcessUtilities.cs" />
     <Compile Include="Processes\ProcessProxy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
