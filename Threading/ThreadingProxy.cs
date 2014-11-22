@@ -1,9 +1,17 @@
 ﻿using System;
 using System.Threading;
-using ImpromptuInterface;
 
 namespace ItzWarty.Threading {
    public class ThreadingProxy : IThreadingProxy {
+      private readonly IThreadingFactory threadingFactory;
+      private readonly ISynchronizationFactory synchronizationFactory;
+
+      public ThreadingProxy(IThreadingFactory threadingFactory, ISynchronizationFactory synchronizationFactory) {
+         this.threadingFactory = threadingFactory;
+         this.synchronizationFactory = synchronizationFactory;
+      }
+
+      #region IThreadingProxy
       public void Sleep(int durationMilliseconds) {
          Thread.Sleep(durationMilliseconds);
       }
@@ -11,31 +19,38 @@ namespace ItzWarty.Threading {
       public void Sleep(TimeSpan duration) {
          Thread.Sleep(duration);
       }
+      #endregion
 
+      #region IThreadingFactory
       public IThread CreateThread(ThreadEntryPoint entryPoint, ThreadCreationOptions options) {
-         var thread = new Thread(() => entryPoint());
-         thread.IsBackground = options.IsBackground;
-         return thread.ActLike<IThread>();
+         return threadingFactory.CreateThread(entryPoint, options);
       }
+      #endregion
 
+      #region ISynchronizationFactory
       public ISemaphore CreateSemaphore(int initialCount, int maximumCount) {
-         return new SemaphoreProxy(initialCount, maximumCount);
+         return synchronizationFactory.CreateSemaphore(initialCount, maximumCount);
       }
 
       public ICountdownEvent CreateCountdownEvent(int initialCount) {
-         return new CountdownEventProxy(initialCount);
+         return synchronizationFactory.CreateCountdownEvent(initialCount);
       }
 
       public ICancellationTokenSource CreateCancellationTokenSource() {
-         return new CancellationTokenSource().ActLike<ICancellationTokenSource>();
+         return synchronizationFactory.CreateCancellationTokenSource();
       }
 
       public ICancellationTokenSource CreateCancellationTokenSource(int cancellationDelayMilliseconds) {
-         return new CancellationTokenSource(cancellationDelayMilliseconds).ActLike<ICancellationTokenSource>();
+         return synchronizationFactory.CreateCancellationTokenSource(cancellationDelayMilliseconds);
       }
 
       public ICancellationTokenSource CreateCancellationTokenSource(TimeSpan cancellationDelay) {
-         return new CancellationTokenSource(cancellationDelay).ActLike<ICancellationTokenSource>();
+         return synchronizationFactory.CreateCancellationTokenSource(cancellationDelay);
       }
+
+      public ICancellationTokenSource CreateLinkedCancellationTokenSource(params ICancellationToken[] tokens) {
+         return synchronizationFactory.CreateLinkedCancellationTokenSource(tokens);
+      }
+      #endregion
    }
 }

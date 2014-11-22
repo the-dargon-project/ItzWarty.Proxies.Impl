@@ -33,16 +33,16 @@ namespace ItzWarty.Threading {
          return obj.Wait(timespan);
       }
 
-      public bool Wait(CancellationToken cancellationToken) {
-         return !Util.IsThrown<OperationCanceledException>(() => obj.Wait(cancellationToken));
+      public bool Wait(ICancellationToken cancellationToken) {
+         return !Util.IsThrown<OperationCanceledException>(() => obj.Wait(cancellationToken.__InnerToken));
       }
 
-      public bool Wait(int millseconds, CancellationToken cancellationToken) {
-         return obj.Wait(millseconds, cancellationToken);
+      public bool Wait(int millseconds, ICancellationToken cancellationToken) {
+         return obj.Wait(millseconds, cancellationToken.__InnerToken);
       }
 
-      public bool Wait(TimeSpan timespan, CancellationToken cancellationToken) {
-         return obj.Wait(timespan, cancellationToken);
+      public bool Wait(TimeSpan timespan, ICancellationToken cancellationToken) {
+         return obj.Wait(timespan, cancellationToken.__InnerToken);
       }
    }
 }

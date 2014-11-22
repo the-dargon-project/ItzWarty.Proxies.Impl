@@ -24,9 +24,19 @@ namespace ItzWarty.Networking {
       public Socket __Socket { get { return listener; } }
 
       public IConnectedSocket Accept() {
+         return InnerAccept(cancellationTokenSource.Token);
+      }
+
+      public IConnectedSocket Accept(ICancellationToken cancellationToken) {
+         using (var linkedTokenSource = threadingProxy.CreateLinkedCancellationTokenSource(this.cancellationTokenSource.Token, cancellationToken)) {
+            return InnerAccept(linkedTokenSource.Token);
+         }
+      }
+
+      private IConnectedSocket InnerAccept(ICancellationToken token) {
          lock (synchronization) {
             var asyncResult = listener.BeginAccept(ar => acceptSemaphore.Release(), null);
-            acceptSemaphore.Wait(cancellationTokenSource.Token);
+            acceptSemaphore.Wait(token);
 
             if (asyncResult.IsCompleted) {
                return networkingInternalFactory.CreateConnectedSocket(listener.EndAccept(asyncResult));
