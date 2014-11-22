@@ -9,6 +9,7 @@ namespace ItzWarty.Threading {
    public class CancellationTokenSourceWrapper : ICancellationTokenSource {
       private readonly CancellationTokenSource source;
       private readonly CancellationTokenWrapper token;
+      private bool isDisposed = false;
 
       public CancellationTokenSourceWrapper(CancellationTokenSource source) {
          this.source = source;
@@ -31,7 +32,12 @@ namespace ItzWarty.Threading {
       public ICancellationToken Token { get { return token; } }
 
       public void Dispose() {
-         source.Dispose();
+         if (!isDisposed) {
+            isDisposed = true;
+
+            source.Cancel();
+            source.Dispose();
+         }
       }
    }
 }
