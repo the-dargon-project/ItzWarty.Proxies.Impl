@@ -42,7 +42,7 @@
     </Reference>
     <Reference Include="libwarty.proxies-api, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>packages\libwarty.proxies-api.0.0.7\lib\net45\libwarty.proxies-api.dll</HintPath>
+      <HintPath>packages\libwarty.proxies-api.0.0.8\lib\net45\libwarty.proxies-api.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -54,11 +54,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IO\FileSystemProxy.cs" />
-    <Compile Include="IO\NetworkingProxy.cs" />
     <Compile Include="Networking\ConnectedSocket.cs" />
+    <Compile Include="Networking\DnsProxy.cs" />
+    <Compile Include="Networking\IDnsProxy.cs" />
+    <Compile Include="Networking\INetworkingInternalFactory.cs" />
+    <Compile Include="Networking\NetworkingInternalFactory.cs" />
     <Compile Include="Networking\ListenerSocket.cs" />
+    <Compile Include="Networking\SocketFactory.cs" />
     <Compile Include="Networking\NetworkingProxy.cs" />
     <Compile Include="Networking\TcpEndPoint.cs" />
+    <Compile Include="Networking\TcpEndPointFactory.cs" />
     <Compile Include="Processes\ParentProcessUtilities.cs" />
     <Compile Include="Processes\ProcessProxy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -69,7 +74,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
