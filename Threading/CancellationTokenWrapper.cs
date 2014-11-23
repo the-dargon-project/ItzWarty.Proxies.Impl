@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 
 namespace ItzWarty.Threading {
    public class CancellationTokenWrapper : ICancellationToken {
@@ -14,6 +15,14 @@ namespace ItzWarty.Threading {
       public bool IsCancellationRequested { get { return token.IsCancellationRequested; } }
       public bool CanBeCanceled { get { return token.CanBeCanceled; } }
       public CancellationToken __InnerToken { get { return token; } }
+
+      public bool WaitForCancellation(int millisecondsTimeout) {
+         return this.token.WaitHandle.WaitOne(millisecondsTimeout);
+      }
+
+      public bool WaitForCancellation(TimeSpan timeout) {
+         return this.token.WaitHandle.WaitOne(timeout);
+      }
 
       public void ThrowIfCancellationRequested() {
          token.ThrowIfCancellationRequested();
