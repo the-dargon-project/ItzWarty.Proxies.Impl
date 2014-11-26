@@ -54,5 +54,6 @@ namespace ItzWarty.IO {
 
       public IBinaryReader GetReader() { return reader; }
       public IBinaryWriter GetWriter() { return writer; }
+      public void Dispose() { stream.Dispose(); }
    }
 }
