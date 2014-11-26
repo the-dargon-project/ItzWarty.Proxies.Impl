@@ -2,21 +2,57 @@
 using System.IO;
 using ImpromptuInterface;
 
-namespace ItzWarty.IO
-{
-   public class FileSystemProxy : IFileSystemProxy
-   {
-      public IEnumerable<string> EnumerateDirectories(string path) { return Directory.EnumerateDirectories(path); }
-      public IEnumerable<string> EnumerateDirectories(string path, string searchPattern) { return Directory.EnumerateDirectories(path, searchPattern); }
-      public IEnumerable<string> EnumerateDirectories(string path, string searchPattern, SearchOption searchOption) { return Directory.EnumerateDirectories(path, searchPattern, searchOption); }
+namespace ItzWarty.IO {
+   public class FileSystemProxy : IFileSystemProxy {
+      private readonly IStreamFactory streamFactory;
 
-      public IDirectoryInfo GetDirectoryInfo(string path) { return WrapDirectoryInfo(new DirectoryInfo(path)); }
-      public string ReadAllText(string path) { return File.ReadAllText(path); }
-      public void WriteAllText(string path, string contents) {  File.WriteAllText(path, contents);}
-      public void CopyFile(string sourceFilePath, string destinationFilePath) { File.Copy(sourceFilePath, destinationFilePath); }
+      public FileSystemProxy(IStreamFactory streamFactory) {
+         this.streamFactory = streamFactory;
+      }
 
-      public void PrepareDirectory(string path) { Directory.CreateDirectory(path); }
-      public void PrepareParentDirectory(string path) { Directory.CreateDirectory(path.Split('/', '\\').Pass(x => x.SubArray(0, x.Length - 1).Join("/"))); }
+      public IFileStream CreateFile(string path) {
+         return streamFactory.CreateFileStream(path);
+      }
+
+      public IFileStream OpenFile(string path, FileMode mode = FileMode.Open, FileAccess access = FileAccess.ReadWrite, FileShare share = FileShare.None) {
+         return streamFactory.CreateFileStream(path, mode, access, share);
+      }
+
+      public IEnumerable<string> EnumerateDirectories(string path) {
+         return Directory.EnumerateDirectories(path);
+      }
+
+      public IEnumerable<string> EnumerateDirectories(string path, string searchPattern) {
+         return Directory.EnumerateDirectories(path, searchPattern);
+      }
+
+      public IEnumerable<string> EnumerateDirectories(string path, string searchPattern, SearchOption searchOption) {
+         return Directory.EnumerateDirectories(path, searchPattern, searchOption);
+      }
+
+      public IDirectoryInfo GetDirectoryInfo(string path) {
+         return WrapDirectoryInfo(new DirectoryInfo(path));
+      }
+
+      public string ReadAllText(string path) {
+         return File.ReadAllText(path);
+      }
+
+      public void WriteAllText(string path, string contents) {
+         File.WriteAllText(path, contents);
+      }
+
+      public void CopyFile(string sourceFilePath, string destinationFilePath) {
+         File.Copy(sourceFilePath, destinationFilePath);
+      }
+
+      public void PrepareDirectory(string path) {
+         Directory.CreateDirectory(path);
+      }
+
+      public void PrepareParentDirectory(string path) {
+         Directory.CreateDirectory(path.Split('/', '\\').Pass(x => x.SubArray(0, x.Length - 1).Join("/")));
+      }
 
       public void DeleteDirectory(string path, bool recursive = false) {
          if (!recursive) {
@@ -33,6 +69,8 @@ namespace ItzWarty.IO
          }
       }
 
-      private IDirectoryInfo WrapDirectoryInfo(DirectoryInfo directoryInfo) { return directoryInfo.ActLike<IDirectoryInfo>(); }
+      private IDirectoryInfo WrapDirectoryInfo(DirectoryInfo directoryInfo) {
+         return directoryInfo.ActLike<IDirectoryInfo>();
+      }
    }
 }

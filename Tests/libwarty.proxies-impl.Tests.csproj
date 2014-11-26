@@ -38,20 +38,24 @@
   <ItemGroup>
     <Reference Include="Castle.Core">
       <HintPath>..\packages\NMockito.0.0.6\lib\net45\Castle.Core.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="libwarty">
-      <HintPath>..\packages\libwarty.0.0.9\lib\portable-net45+netcore45+MonoAndroid1+MonoTouch1\libwarty.dll</HintPath>
+    <Reference Include="libwarty, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\libwarty.proxies-api.0.0.12\lib\net45\libwarty.dll</HintPath>
     </Reference>
     <Reference Include="libwarty.proxies-api, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\libwarty.proxies-api.0.0.11\lib\net45\libwarty.proxies-api.dll</HintPath>
+      <HintPath>..\packages\libwarty.proxies-api.0.0.12\lib\net45\libwarty.proxies-api.dll</HintPath>
     </Reference>
     <Reference Include="NMockito">
       <HintPath>..\packages\NMockito.0.0.6\lib\net45\NMockito.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="xunit">
       <HintPath>..\packages\NMockito.0.0.6\lib\net45\xunit.dll</HintPath>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <Choose>
@@ -70,13 +74,13 @@
     <Compile Include="Threading\ThreadingProxyTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\libwarty.proxies-impl.csproj">
       <Project>{16a9f397-500c-4863-bb0e-ac2fa63214a1}</Project>
       <Name>libwarty.proxies-impl</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
