@@ -9,8 +9,8 @@ namespace ItzWarty.IO {
 
       public StreamWrapper(Stream stream) {
          this.stream = stream;
-         this.reader = new BinaryReaderWrapper(this, Encoding.UTF8, true);
-         this.writer = new BinaryWriterWrapper(this, Encoding.UTF8, true);
+         this.reader = stream.CanRead ? new BinaryReaderWrapper(this, Encoding.UTF8, true) : null;
+         this.writer = stream.CanWrite ? new BinaryWriterWrapper(this, Encoding.UTF8, true) : null;
       }
 
       public long Length { get { return stream.Length; } }
