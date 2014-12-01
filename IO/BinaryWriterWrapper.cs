@@ -121,5 +121,9 @@ namespace ItzWarty.IO {
       }
 
       public IStream BaseStream { get { return stream; } }
+
+      public void Dispose() {
+         writer.Dispose();
+      }
    }
 }

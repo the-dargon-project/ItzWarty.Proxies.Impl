@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using ItzWarty.IO;
 using System.Net.Sockets;
 using System.Text;
 
@@ -6,23 +7,23 @@ namespace ItzWarty.Networking {
    public class ConnectedSocket : IConnectedSocket {
       private readonly INetworkingInternalFactory networkingInternalFactory;
       private readonly Socket socket;
-      private readonly NetworkStream networkStream;
-      private readonly BinaryReader reader;
-      private readonly BinaryWriter writer;
+      private readonly IStream networkStream;
+      private readonly IBinaryReader reader;
+      private readonly IBinaryWriter writer;
 
-      public ConnectedSocket(INetworkingInternalFactory networkingInternalFactory, Socket socket) {
+      public ConnectedSocket(IStreamFactory streamFactory, INetworkingInternalFactory networkingInternalFactory, Socket socket) {
          this.networkingInternalFactory = networkingInternalFactory;
          this.socket = socket;
-         this.networkStream = networkingInternalFactory.CreateNetworkStream(socket, true);
-         this.reader = new BinaryReader(networkStream, Encoding.UTF8, true);
-         this.writer = new BinaryWriter(networkStream, Encoding.UTF8, true);
+         this.networkStream = streamFactory.CreateFromStream(networkingInternalFactory.CreateNetworkStream(socket, true));
+         this.reader = networkStream.GetReader();
+         this.writer = networkStream.GetWriter();
       }
 
       public Socket __Socket { get { return socket; } }
 
-      public BinaryReader GetReader() { return reader; }
+      public IBinaryReader GetReader() { return reader; }
 
-      public BinaryWriter GetWriter() { return writer; }
+      public IBinaryWriter GetWriter() { return writer; }
 
       public void Dispose() {
          writer.Dispose();
