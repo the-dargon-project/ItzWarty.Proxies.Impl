@@ -30,8 +30,25 @@ namespace ItzWarty.IO {
          return Directory.EnumerateDirectories(path, searchPattern, searchOption);
       }
 
+      public bool Exists(string path) {
+         return File.Exists(path);
+      }
+
+      public IFileInfo GetFileInfo(string path) {
+         return WrapFileInfo(new FileInfo(path));
+      }
+
       public IDirectoryInfo GetDirectoryInfo(string path) {
          return WrapDirectoryInfo(new DirectoryInfo(path));
+      }
+
+      public IFileSystemInfo GetFileSystemInfo(string path) {
+         var info = GetFileInfo(path);
+         if (info.Attributes.HasFlag(FileAttributes.Directory)) {
+            return GetDirectoryInfo(path);
+         } else {
+            return info;
+         }
       }
 
       public string ReadAllText(string path) {
@@ -54,6 +71,10 @@ namespace ItzWarty.IO {
          Directory.CreateDirectory(path.Split('/', '\\').Pass(x => x.SubArray(0, x.Length - 1).Join("/")));
       }
 
+      public void DeleteFile(string path) {
+         File.Delete(path);
+      }
+
       public void DeleteDirectory(string path, bool recursive = false) {
          if (!recursive) {
             Directory.Delete(path, false);
@@ -69,8 +90,24 @@ namespace ItzWarty.IO {
          }
       }
 
-      private IDirectoryInfo WrapDirectoryInfo(DirectoryInfo directoryInfo) {
-         return directoryInfo.ActLike<IDirectoryInfo>();
+      public void MoveFile(string source, string destination) {
+         File.Move(source, destination);
+      }
+
+      public void MoveDirectory(string source, string destination) {
+         Directory.Move(source, destination);
+      }
+
+      internal IFileInfo WrapFileInfo(FileInfo fileInfo) {
+         return new FileInfoWrapper(this, fileInfo);
+      }
+
+      internal IDirectoryInfo WrapDirectoryInfo(DirectoryInfo directoryInfo) {
+         return new DirectoryInfoWrapper(this, directoryInfo);
+      }
+
+      internal IFileSystemInfo WrapFileSystemInfo(FileSystemInfo fileSystemInfo) {
+         return new FileSystemInfoWrapper(this, fileSystemInfo);
       }
    }
 }
