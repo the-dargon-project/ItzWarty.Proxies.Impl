@@ -5,12 +5,6 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "libwarty.proxies-impl", "libwarty.proxies-impl.csproj", "{16A9F397-500C-4863-BB0E-AC2FA63214A1}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{A3572C17-0307-43A0-8726-3ADF7CCDED51}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.targets = .nuget\NuGet.targets
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "libwarty.proxies-impl.Tests", "Tests\libwarty.proxies-impl.Tests.csproj", "{2AEA6C83-7431-4130-A35C-5D0103516997}"
 EndProject
 Global
