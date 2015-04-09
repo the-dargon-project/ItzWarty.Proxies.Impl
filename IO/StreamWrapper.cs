@@ -7,10 +7,13 @@ namespace ItzWarty.IO {
       private IBinaryReader reader;
       private IBinaryWriter writer;
 
-      public StreamWrapper(Stream stream) {
+      public StreamWrapper(Stream stream) : this(stream, true) {
+      }
+
+      public StreamWrapper(Stream stream, bool leaveOpen) {
          this.stream = stream;
-         this.reader = stream.CanRead ? new BinaryReaderWrapper(this, Encoding.UTF8, true) : null;
-         this.writer = stream.CanWrite ? new BinaryWriterWrapper(this, Encoding.UTF8, true) : null;
+         this.reader = stream.CanRead ? new BinaryReaderWrapper(this, Encoding.UTF8, leaveOpen) : null;
+         this.writer = stream.CanWrite ? new BinaryWriterWrapper(this, Encoding.UTF8, leaveOpen) : null;
       }
 
       public long Length { get { return stream.Length; } }

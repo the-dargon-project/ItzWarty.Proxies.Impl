@@ -11,6 +11,10 @@ namespace ItzWarty.IO {
          return new StreamWrapper(stream);
       }
 
+      public IStream CreateFromStream(Stream stream, bool leaveOpen) {
+         return new StreamWrapper(stream, leaveOpen);
+      }
+
       public IFileStream CreateFileStream(string path, FileMode mode = FileMode.Open, FileAccess access = FileAccess.ReadWrite, FileShare share = FileShare.None) {
          return new FileStreamWrapper(new FileStream(path, mode, access, share));
       }
@@ -37,6 +41,30 @@ namespace ItzWarty.IO {
 
       public IMemoryStream CreateMemoryStream(byte[] buffer, int index, int count, bool writable) {
          return new MemoryStreamWrapper(new MemoryStream(buffer, index, count, writable));
+      }
+
+      public IBinaryReader CreateBinaryReader(IStream stream) {
+         return new BinaryReaderWrapper(stream);
+      }
+
+      public IBinaryReader CreateBinaryReader(IStream stream, Encoding encoding) {
+         return new BinaryReaderWrapper(stream, encoding);
+      }
+
+      public IBinaryReader CreateBinaryReader(IStream stream, Encoding encoding, bool leaveOpen) {
+         return new BinaryReaderWrapper(stream, encoding, leaveOpen);
+      }
+
+      public IBinaryWriter CreateBinaryWriter(IStream stream) {
+         return new BinaryWriterWrapper(stream);
+      }
+
+      public IBinaryWriter CreateBinaryWriter(IStream stream, Encoding encoding) {
+         return new BinaryWriterWrapper(stream, encoding);
+      }
+
+      public IBinaryWriter CreateBinaryWriter(IStream stream, Encoding encoding, bool leaveOpen) {
+         return new BinaryWriterWrapper(stream, encoding, leaveOpen);
       }
    }
 }
