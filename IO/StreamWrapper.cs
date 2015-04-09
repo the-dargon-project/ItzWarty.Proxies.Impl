@@ -1,5 +1,7 @@
-﻿using System.IO;
+﻿using ItzWarty.Threading;
+using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ItzWarty.IO {
    public class StreamWrapper : IStream {
@@ -30,6 +32,13 @@ namespace ItzWarty.IO {
       public int Read(byte[] buffer, int offset, int count) {
          return stream.Read(buffer, offset, count);
       }
+      public Task<int> ReadAsync(byte[] buffer, int offset, int count) {
+         return stream.ReadAsync(buffer, offset, count);
+      }
+
+      public Task<int> ReadAsync(byte[] buffer, int offset, int count, ICancellationToken cancellationToken) {
+         return stream.ReadAsync(buffer, offset, count, cancellationToken.__InnerToken);
+      }
 
       public bool CanSeek { get { return stream.CanSeek; } }
       public long Seek(long offset, SeekOrigin origin) {
@@ -43,6 +52,13 @@ namespace ItzWarty.IO {
 
       public void Write(byte[] buffer, int offset, int count) {
          stream.Write(buffer, offset, count);
+      }
+
+      public Task WriteAsync(byte[] buffer, int offset, int count) {
+         return stream.WriteAsync(buffer, offset, count);
+      }
+      public Task WriteAsync(byte[] buffer, int offset, int count, ICancellationToken cancellationToken) {
+         return stream.WriteAsync(buffer, offset, count, cancellationToken.__InnerToken);
       }
 
       public void Flush() {
