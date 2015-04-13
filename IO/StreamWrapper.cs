@@ -70,6 +70,8 @@ namespace ItzWarty.IO {
       }
 
       public Stream __Stream { get { return stream; } }
+      public IBinaryReader Reader { get { return reader; } }
+      public IBinaryWriter Writer { get { return writer; } }
 
       public IBinaryReader GetReader() { return reader; }
       public IBinaryWriter GetWriter() { return writer; }
