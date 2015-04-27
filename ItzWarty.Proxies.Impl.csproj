@@ -84,6 +84,7 @@
     <Compile Include="Threading\ThreadingProxy.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="NuGet.Config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
