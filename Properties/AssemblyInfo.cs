@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("libwarty.proxies-impl")]
+[assembly: AssemblyTitle("ItzWarty.Proxies.Impl")]
 [assembly: AssemblyDescription("Implementation for abstracting common static invocations.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("ItzWarty")]
-[assembly: AssemblyProduct("proxies-impl")]
+[assembly: AssemblyProduct("ItzWarty.Proxies.Impl")]
 [assembly: AssemblyCopyright("Copyright © ItzWarty 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

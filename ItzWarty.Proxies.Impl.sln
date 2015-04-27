@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.22609.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "libwarty.proxies-impl", "libwarty.proxies-impl.csproj", "{16A9F397-500C-4863-BB0E-AC2FA63214A1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItzWarty.Proxies.Impl", "ItzWarty.Proxies.Impl.csproj", "{16A9F397-500C-4863-BB0E-AC2FA63214A1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "libwarty.proxies-impl.Tests", "Tests\libwarty.proxies-impl.Tests.csproj", "{2AEA6C83-7431-4130-A35C-5D0103516997}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItzWarty.Proxies.Impl.Tests", "Tests\ItzWarty.Proxies.Impl.Tests.csproj", "{2AEA6C83-7431-4130-A35C-5D0103516997}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
