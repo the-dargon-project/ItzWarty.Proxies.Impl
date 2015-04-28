@@ -50,15 +50,15 @@ namespace ItzWarty.Threading {
       }
 
       public bool Wait(ICancellationToken cancellationToken) {
-         return !Util.IsThrown<OperationCanceledException>(() => obj.Wait(cancellationToken.__InnerToken));
+         return !Util.IsThrown<OperationCanceledException>(() => obj.Wait(cancellationToken.GetInnerTokenOrNone()));
       }
 
       public bool Wait(int milliseconds, ICancellationToken cancellationToken) {
-         return obj.Wait(milliseconds, cancellationToken.__InnerToken);
+         return obj.Wait(milliseconds, cancellationToken.GetInnerTokenOrNone());
       }
 
       public bool Wait(TimeSpan timespan, ICancellationToken cancellationToken) {
-         return obj.Wait(timespan, cancellationToken.__InnerToken);
+         return obj.Wait(timespan, cancellationToken.GetInnerTokenOrNone());
       }
 
       public int CurrentCount { get { return obj.CurrentCount; } }

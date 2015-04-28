@@ -1,4 +1,5 @@
-﻿using ItzWarty.Threading;
+﻿using ItzWarty;
+using ItzWarty.Threading;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,7 +38,7 @@ namespace ItzWarty.IO {
       }
 
       public Task<int> ReadAsync(byte[] buffer, int offset, int count, ICancellationToken cancellationToken) {
-         return stream.ReadAsync(buffer, offset, count, cancellationToken.__InnerToken);
+         return stream.ReadAsync(buffer, offset, count, cancellationToken.GetInnerTokenOrNone());
       }
 
       public bool CanSeek { get { return stream.CanSeek; } }
@@ -58,7 +59,7 @@ namespace ItzWarty.IO {
          return stream.WriteAsync(buffer, offset, count);
       }
       public Task WriteAsync(byte[] buffer, int offset, int count, ICancellationToken cancellationToken) {
-         return stream.WriteAsync(buffer, offset, count, cancellationToken.__InnerToken);
+         return stream.WriteAsync(buffer, offset, count, cancellationToken.GetInnerTokenOrNone());
       }
 
       public void Flush() {
