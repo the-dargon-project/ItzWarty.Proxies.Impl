@@ -3,10 +3,13 @@ using System.IO;
 
 namespace ItzWarty.IO {
    public class FileSystemInfoWrapper : IFileSystemInfo {
-      private readonly FileSystemProxy fileSystemProxy;
+      private readonly InternalFileSystemProxy fileSystemProxy;
       private readonly FileSystemInfo fileSystemInfo;
 
-      public FileSystemInfoWrapper(FileSystemProxy fileSystemProxy, FileSystemInfo fileSystemInfo) {
+      [Obsolete]
+      public FileSystemInfoWrapper(FileSystemProxy fileSystemProxy, FileSystemInfo fileSystemInfo) : this((InternalFileSystemProxy)fileSystemProxy, fileSystemInfo) { }
+
+      internal FileSystemInfoWrapper(InternalFileSystemProxy fileSystemProxy, FileSystemInfo fileSystemInfo) {
          this.fileSystemProxy = fileSystemProxy;
          this.fileSystemInfo = fileSystemInfo;
       }

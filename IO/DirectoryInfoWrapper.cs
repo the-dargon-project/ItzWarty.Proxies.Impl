@@ -5,16 +5,25 @@ using System.Linq;
 
 namespace ItzWarty.IO {
    public class DirectoryInfoWrapper : FileSystemInfoWrapper, IDirectoryInfo {
-      private readonly FileSystemProxy fileSystemProxy;
+      private readonly InternalFileSystemProxy fileSystemProxy;
       private readonly DirectoryInfo directoryInfo;
 
-      public DirectoryInfoWrapper(FileSystemProxy fileSystemProxy, DirectoryInfo directoryInfo)
+      [Obsolete]
+      public DirectoryInfoWrapper(
+         FileSystemProxy fileSystemProxy, 
+         DirectoryInfo directoryInfo
+      ) : this(
+         (InternalFileSystemProxy)fileSystemProxy, 
+         directoryInfo
+      ) { }
+
+      internal DirectoryInfoWrapper(InternalFileSystemProxy fileSystemProxy, DirectoryInfo directoryInfo)
          : base(fileSystemProxy, directoryInfo) {
          this.fileSystemProxy = fileSystemProxy;
          this.directoryInfo = directoryInfo;
       }
 
-      public override IDirectoryInfo Parent { get { throw new NotImplementedException(); } }
+      public override IDirectoryInfo Parent => fileSystemProxy.WrapDirectoryInfo(directoryInfo.Parent);
 
       public void Create() {
          fileSystemProxy.PrepareDirectory(directoryInfo.FullName);

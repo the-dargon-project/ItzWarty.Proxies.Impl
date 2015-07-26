@@ -65,6 +65,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="IO\DirectoryInfoWrapperTests.cs" />
     <Compile Include="Networking\NetworkingProxyTests.cs" />
     <Compile Include="Networking\TcpEndPointFactoryTests.cs" />
     <Compile Include="Networking\TcpEndPointTests.cs" />

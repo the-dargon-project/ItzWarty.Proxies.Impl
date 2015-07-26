@@ -59,6 +59,7 @@
     <Compile Include="IO\FileSystemInfoWrapper.cs" />
     <Compile Include="IO\FileStreamWrapper.cs" />
     <Compile Include="IO\FileSystemProxy.cs" />
+    <Compile Include="IO\InternalFileSystemProxy.cs" />
     <Compile Include="IO\MemoryStreamWrapper.cs" />
     <Compile Include="IO\StreamFactory.cs" />
     <Compile Include="IO\StreamWrapper.cs" />

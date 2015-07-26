@@ -3,7 +3,7 @@ using System.IO;
 using ImpromptuInterface;
 
 namespace ItzWarty.IO {
-   public class FileSystemProxy : IFileSystemProxy {
+   public class FileSystemProxy : IFileSystemProxy, InternalFileSystemProxy {
       private readonly IStreamFactory streamFactory;
 
       public FileSystemProxy(IStreamFactory streamFactory) {
@@ -98,15 +98,15 @@ namespace ItzWarty.IO {
          Directory.Move(source, destination);
       }
 
-      internal IFileInfo WrapFileInfo(FileInfo fileInfo) {
+      public IFileInfo WrapFileInfo(FileInfo fileInfo) {
          return new FileInfoWrapper(this, fileInfo);
       }
 
-      internal IDirectoryInfo WrapDirectoryInfo(DirectoryInfo directoryInfo) {
+      public IDirectoryInfo WrapDirectoryInfo(DirectoryInfo directoryInfo) {
          return new DirectoryInfoWrapper(this, directoryInfo);
       }
 
-      internal IFileSystemInfo WrapFileSystemInfo(FileSystemInfo fileSystemInfo) {
+      public IFileSystemInfo WrapFileSystemInfo(FileSystemInfo fileSystemInfo) {
          return new FileSystemInfoWrapper(this, fileSystemInfo);
       }
    }
