@@ -1,4 +1,5 @@
 ﻿
+using System.Net;
 using NMockito;
 using Xunit;
 
@@ -102,6 +103,20 @@ namespace ItzWarty.Networking {
          AssertEquals(result, testObj.CreateEndPoint(host, port));
 
          Verify(tcpEndPointFactory).CreateEndPoint(host, port);
+         VerifyNoMoreInteractions();
+      }
+
+      [Fact]
+      public void CreateEndPointByAddressPortDelegatesToTcpEndPointFactory() {
+         IPAddress address = IPAddress.IPv6Loopback;
+         const int port = 41934;
+
+         var result = CreateMock<ITcpEndPoint>();
+         When(tcpEndPointFactory.CreateEndPoint(address, port)).ThenReturn(result);
+
+         AssertEquals(result, testObj.CreateEndPoint(address, port));
+
+         Verify(tcpEndPointFactory).CreateEndPoint(address, port);
          VerifyNoMoreInteractions();
       }
    }

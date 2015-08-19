@@ -18,6 +18,10 @@ namespace ItzWarty.Networking {
 
       public ITcpEndPoint CreateEndPoint(string host, int port) {
          var address = dnsProxy.ResolveIPAddress(host);
+         return CreateEndPoint(address, port);
+      }
+
+      public ITcpEndPoint CreateEndPoint(IPAddress address, int port) {
          return new TcpEndPoint(new IPEndPoint(address, port));
       }
    }
